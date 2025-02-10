@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getBlogs, searchBlogsByTitle,deleteBlog } from "../service/BlogService";
 import {Link} from "react-router-dom";
+import {toast} from "react-toastify";
 
 const BlogComponent = () => {
     const [blogs, setBlogs] = useState([]);
@@ -58,10 +59,10 @@ const BlogComponent = () => {
         if (window.confirm("Bạn có chắc chắn muốn xóa blog này?")) {
             deleteBlog(id).then((success) => {
                 if (success) {
-                    alert("Xóa thành công!");
+                    toast.success("Xóa Thành Công");
                     fetchBlogs();
                 } else {
-                    alert("Xóa thất bại!");
+                    toast.error("Xóa Thất Bại");
                 }
             });
         }

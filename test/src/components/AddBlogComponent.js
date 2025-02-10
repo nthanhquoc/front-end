@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createBlog } from '../service/BlogService';
 import { getCategories } from '../service/CategoryService';
+import {toast} from "react-toastify";
 
 const AddBlogComponent = () => {
     const [title, setTitle] = useState('');
@@ -33,10 +34,10 @@ const AddBlogComponent = () => {
         createBlog(blog)
             .then((data) => {
                 if (data) {
-                    alert('Tạo blog thành công!');
+                    toast.success("Tạo Blog Thành Công");
                     navigate('/');
                 } else {
-                    alert('Tạo blog thất bại!');
+                    toast.error("Tạo Blog Thất Bại");
                 }
             })
             .catch((error) => {

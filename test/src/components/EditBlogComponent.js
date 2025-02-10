@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import {useParams, useNavigate, Link} from "react-router-dom";
 import { getBlogById, updateBlog } from "../service/BlogService";
 import { getCategories } from "../service/CategoryService";
+import {toast} from "react-toastify";
 
 const EditBlogComponent = () => {
     const { id } = useParams();
@@ -37,10 +38,10 @@ const EditBlogComponent = () => {
 
         updateBlog(id, updatedBlog).then((data) => {
             if (data) {
-                alert("Cập nhật blog thành công!");
+               toast.success("Cập Nhập Blog Thành Công");
                 navigate("/");
             } else {
-                alert("Cập nhật thất bại!");
+                toast.error("Cập Nhập Blog Thất Bại");
             }
         });
     };
@@ -73,6 +74,7 @@ const EditBlogComponent = () => {
                     </select>
                 </div>
                 <button type="submit">Cập nhật</button>
+                <Link to="/">Quay lại danh sách</Link>
             </form>
         </div>
     );

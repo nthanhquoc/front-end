@@ -18,6 +18,7 @@ const BlogDetailComponent = () => {
 
     return (
         <div>
+            <h1>Chi Tiết Blog</h1>
             <h2>{blog.title}</h2>
             <p><strong>Nội dung:</strong> {blog.content}</p>
             <p><strong>Tác giả:</strong> {blog.author}</p>
