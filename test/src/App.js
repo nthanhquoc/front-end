@@ -5,7 +5,7 @@ import AddBlogComponent from "./components/AddBlogComponent";
 import BlogDetailComponent from "./components/BLogDetailComponent";
 import EditBlogComponent from "./components/EditBlogComponent";
 import {ToastContainer} from "react-toastify";
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 function App() {
   return (
     <div className="App">

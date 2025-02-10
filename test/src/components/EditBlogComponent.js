@@ -3,6 +3,7 @@ import {useParams, useNavigate, Link} from "react-router-dom";
 import { getBlogById, updateBlog } from "../service/BlogService";
 import { getCategories } from "../service/CategoryService";
 import {toast} from "react-toastify";
+import { Container, Row, Col, Card, Form, Button } from 'react-bootstrap';
 
 const EditBlogComponent = () => {
     const { id } = useParams();
@@ -47,36 +48,79 @@ const EditBlogComponent = () => {
     };
 
     return (
-        <div>
-            <h2>Chỉnh sửa Blog</h2>
-            <form onSubmit={handleUpdate}>
-                <div>
-                    <label>Tiêu đề:</label>
-                    <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} required />
-                </div>
-                <div>
-                    <label>Nội dung:</label>
-                    <textarea value={content} onChange={(e) => setContent(e.target.value)} required />
-                </div>
-                <div>
-                    <label>Tác giả:</label>
-                    <input type="text" value={author} onChange={(e) => setAuthor(e.target.value)} required />
-                </div>
-                <div>
-                    <label>Danh mục:</label>
-                    <select value={categoryId} onChange={(e) => setCategoryId(e.target.value)} required>
-                        <option value="">-- Chọn danh mục --</option>
-                        {categories.map((category) => (
-                            <option key={category.idCategory} value={category.idCategory}>
-                                {category.nameCategory}
-                            </option>
-                        ))}
-                    </select>
-                </div>
-                <button type="submit">Cập nhật</button>
-                <Link to="/">Quay lại danh sách</Link>
-            </form>
-        </div>
+        <Container className="mt-5">
+            <Row className="justify-content-center">
+                <Col md={8} lg={6}>
+                    <Card className="shadow-sm">
+                        <Card.Header className="bg-warning text-white text-center">
+                            <h3 className="mb-0">Chỉnh Sửa Blog</h3>
+                        </Card.Header>
+                        <Card.Body>
+                            <Form onSubmit={handleUpdate}>
+                                <Form.Group className="mb-3" controlId="editBlogTitle">
+                                    <Form.Label>Tiêu đề</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        placeholder="Nhập tiêu đề blog"
+                                        value={title}
+                                        onChange={(e) => setTitle(e.target.value)}
+                                        required
+                                    />
+                                </Form.Group>
+
+                                <Form.Group className="mb-3" controlId="editBlogContent">
+                                    <Form.Label>Nội dung</Form.Label>
+                                    <Form.Control
+                                        as="textarea"
+                                        rows={5}
+                                        placeholder="Nhập nội dung blog..."
+                                        value={content}
+                                        onChange={(e) => setContent(e.target.value)}
+                                        required
+                                    />
+                                </Form.Group>
+
+                                <Form.Group className="mb-3" controlId="editBlogAuthor">
+                                    <Form.Label>Tác giả</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        placeholder="Nhập tên tác giả"
+                                        value={author}
+                                        onChange={(e) => setAuthor(e.target.value)}
+                                        required
+                                    />
+                                </Form.Group>
+
+                                <Form.Group className="mb-4" controlId="editBlogCategory">
+                                    <Form.Label>Danh mục</Form.Label>
+                                    <Form.Select
+                                        value={categoryId}
+                                        onChange={(e) => setCategoryId(e.target.value)}
+                                        required
+                                    >
+                                        <option value="">-- Chọn danh mục --</option>
+                                        {categories.map((category) => (
+                                            <option key={category.idCategory} value={category.idCategory}>
+                                                {category.nameCategory}
+                                            </option>
+                                        ))}
+                                    </Form.Select>
+                                </Form.Group>
+
+                                <div className="d-grid gap-2">
+                                    <Button variant="primary" type="submit">
+                                        Cập nhật
+                                    </Button>
+                                    <Link to="/" className="btn btn-secondary">
+                                        Quay lại danh sách
+                                    </Link>
+                                </div>
+                            </Form>
+                        </Card.Body>
+                    </Card>
+                </Col>
+            </Row>
+        </Container>
     );
 };
 
